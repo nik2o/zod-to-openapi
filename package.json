@@ -1,6 +1,6 @@
 {
   "name": "@skimx/zod-to-openapi",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Builds OpenAPI schemas from Zod schemas",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
