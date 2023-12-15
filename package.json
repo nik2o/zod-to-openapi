@@ -4,6 +4,10 @@
   "description": "Builds OpenAPI schemas from Zod schemas",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "private": "false",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist",
     "package.json",
