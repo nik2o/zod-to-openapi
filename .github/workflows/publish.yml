@@ -1,54 +1,39 @@
-name: Publish
-
+name: Release
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  publish-to-npm:
+  release:
+    name: release
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+      issues: write
+      pull-requests: write
+      id-token: write
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
-          node-version: 16
-          cache: 'npm'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: 20
 
-      - run: npm ci
-      - run: npm test
+      - name: Install dependencies
+        run: npm clean-install
 
-      - run: |
-          git config --global user.name 'GitHub Actions'
-          git config --global user.email 'github-actions@localhost'
-
-      # Update the version in the package files
-      - run: |
-          GIT_TAG="${{github.event.release.tag_name}}"
-          NEW_VERSION="${GIT_TAG/v/}"
-
-          npm version "$NEW_VERSION" --allow-same-version --git-tag-version=false
-          git add package* && git commit -m "Release $NEW_VERSION"
-
-      - run: npm publish --access=public
+      - name: Install and run semantic-release
+        id: semantic_release
+        run: |
+          npm i --no-save --prefix . semantic-release @semantic-release/git @semantic-release/changelog
+          npx semantic-release@22
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
-
-      - run: git show
-      - run: |
-          git fetch origin master
-
-          TAG_NAME="${{github.event.release.tag_name}}"
-          LAST_COMMIT_ID="$(git rev-parse $TAG_NAME)"
-          MASTER_COMMIT_ID="$(git rev-parse origin/master)"
-
-          if [ "$LAST_COMMIT_ID" = "$MASTER_COMMIT_ID" ]; then
-            git push origin HEAD:master
-          else
-            echo "Not pushing to master because the tag we're operating on is behind"
-          fi
-
-      # See https://stackoverflow.com/a/24849501
-      - run: |
-          git tag -f "${{github.event.release.tag_name}}" HEAD
-          git push -f origin "refs/tags/${{github.event.release.tag_name}}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}

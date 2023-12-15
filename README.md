@@ -1,26 +1,34 @@
 # Zod to OpenAPI
 
+This is a fork of [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi)
+
 [![npm version](https://img.shields.io/npm/v/@asteasolutions/zod-to-openapi)](https://www.npmjs.com/package/@asteasolutions/zod-to-openapi)
 [![npm downloads](https://img.shields.io/npm/dm/@asteasolutions/zod-to-openapi)](https://www.npmjs.com/package/@asteasolutions/zod-to-openapi)
 
 A library that uses [zod schemas](https://github.com/colinhacks/zod) to generate an Open API Swagger documentation.
 
-1. [Purpose and quick example](#purpose-and-quick-example)
-2. [Usage](#usage)
-   1. [Installation](#installation)
-   2. [The `openapi` method](#the-openapi-method)
-   3. [The Registry](#the-registry)
-   4. [The Generator](#the-generator)
-   5. [Defining schemas](#defining-schemas)
-   6. [Defining routes & webhooks](#defining-routes--webhooks)
-   7. [Defining custom components](#defining-custom-components)
-   8. [A full example](#a-full-example)
-   9. [Adding it as part of your build](#adding-it-as-part-of-your-build)
-   10. [Using schemas vs a registry](#using-schemas-vs-a-registry)
-3. [Zod schema types](#zod-schema-types)
-   1. [Supported types](#supported-types)
-   2. [Unsupported types](#unsupported-types)
-4. [Technologies](#technologies)
+- [Zod to OpenAPI](#zod-to-openapi)
+  - [Purpose and quick example](#purpose-and-quick-example)
+  - [Usage](#usage)
+    - [Installation](#installation)
+    - [The `openapi` method](#the-openapi-method)
+    - [The Registry](#the-registry)
+    - [The Generator](#the-generator)
+    - [Defining schemas](#defining-schemas)
+    - [Defining routes \& webhooks](#defining-routes--webhooks)
+      - [Registering a path or webhook](#registering-a-path-or-webhook)
+      - [Defining route parameters](#defining-route-parameters)
+      - [Generating the full document](#generating-the-full-document)
+    - [Defining custom components](#defining-custom-components)
+    - [A full example](#a-full-example)
+    - [Using schemas vs a registry](#using-schemas-vs-a-registry)
+      - [Conclusion](#conclusion)
+    - [Adding it as part of your build](#adding-it-as-part-of-your-build)
+  - [Zod schema types](#zod-schema-types)
+    - [Supported types](#supported-types)
+    - [Unsupported types](#unsupported-types)
+      - [Known issues](#known-issues)
+  - [Technologies](#technologies)
 
 We keep a changelog as part of the [GitHub releases](https://github.com/asteasolutions/zod-to-openapi/releases).
 
