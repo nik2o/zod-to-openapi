@@ -1,6 +1,6 @@
 {
   "name": "@nik2o/zod-to-openapi",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Builds OpenAPI schemas from Zod schemas",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
