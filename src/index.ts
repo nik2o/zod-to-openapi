@@ -11,3 +11,5 @@ export {
 
 export { OpenApiGeneratorV3 } from './v3.0/openapi-generator';
 export { OpenApiGeneratorV31 } from './v3.1/openapi-generator';
+
+export * from 'zod';
