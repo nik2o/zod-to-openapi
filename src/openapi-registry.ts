@@ -99,10 +99,10 @@ export type RouteConfig = Omit<OperationObject, 'responses'> & {
   path: string;
   request?: {
     body?: ZodRequestBody;
-    params?: AnyZodObject;
-    query?: AnyZodObject;
-    cookies?: AnyZodObject;
-    headers?: AnyZodObject | ZodType<unknown>[];
+    params?: ZodType<unknown>;
+    query?: ZodType<unknown>;
+    cookies?: ZodType<unknown>;
+    headers?: ZodType<unknown> | ZodType<unknown>[];
   };
   responses: {
     [statusCode: string]: ResponseConfig;
